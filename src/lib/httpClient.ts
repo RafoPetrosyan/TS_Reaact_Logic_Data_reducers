@@ -10,7 +10,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use((config: AxiosRequestConfig): AxiosRequestConfig => {
 
     const accessToken = Account.getAccessToken();
-    if (accessToken) {
+    if (accessToken && config.headers) {
         config.headers['x-authorization'] = accessToken
     }
     return config
