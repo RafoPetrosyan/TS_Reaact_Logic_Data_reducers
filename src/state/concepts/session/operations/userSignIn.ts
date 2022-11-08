@@ -1,9 +1,8 @@
 import { createLogic } from 'redux-logic';
 
-import {IUserSignInAction, SessionActionTypes} from "state/concepts/session/types";
+import {IUsers, IUserSignInAction, SessionActionTypes} from "state/concepts/session/types";
 import { signInUserEndpoint } from "state/concepts/session/endpoints";
 // import {dataApiFailure, dataApiRequest, dataApiSuccess} from "state/data/actions";
-import { IHttpClient } from 'state/types';
 
 import history from "utils/browserHistory";
 
@@ -11,7 +10,14 @@ import Account from "lib/account";
 
 interface IProcess {
     action: IUserSignInAction,
-    httpClient: any,
+    httpClient: {
+        post: (url: string, body: any) => ({
+            data: {
+                token: string,
+                user: IUsers,
+            }
+        })
+    },
 }
 
 const userSignIn = createLogic({
